@@ -21,6 +21,7 @@
                 <div class='col-md-6'>
                     <label for="searchbox">Search for your favorite shows and episodes!</label>
                         <div class="input-group mb-3">
+                            <button type="button" id="homebutton" class="btn btn-primary">Home</button>
                             <!-- <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
                             </div> -->
@@ -84,7 +85,7 @@
                             {% for d in delta %}
                             <tr>
                                 <td>
-                                    {{d}}
+                                    {{d.title}}
                                 </td>
                             </tr>
                             {% endfor %}

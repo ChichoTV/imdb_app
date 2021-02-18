@@ -5,5 +5,8 @@ $(document).ready(function(){
         // $.get(`/search/${search_query}`);
         window.location.replace(`/search/${search_query}`);
     });
+    $("#homebutton").click(function (){
+        window.location.replace('/')
+    })
   
   }); 
