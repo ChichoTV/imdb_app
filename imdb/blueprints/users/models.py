@@ -6,6 +6,7 @@ class Logs(db.Model):
 
     date=db.Column(db.Date, primary_key=True)
     top500=db.relationship("Top500")
+    
 class Top500(db.Model):
     __tablename__='top500episodes'
     
