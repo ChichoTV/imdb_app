@@ -16,9 +16,6 @@ def create_app():
     app.config.from_pyfile('settings.py', silent=True)
 
     app.register_blueprint(page)
-    @app.context_processor
-    def inject():
-        return {'name':'taylor'}
 
     extensions(app)
     return app

@@ -10,17 +10,25 @@ page=Blueprint('page', __name__, template_folder='templates')
 def home():
     dates=Logs.query.order_by(Logs.date.desc()).limit(2).all()
     this_week=dates[0].date
-    # last_week=dates[1].date
-    # old=Top500.query.filter(Top500.date==last_week).all()
-    # entries=Top500.query.order_by(Top500.date.desc(),Top500.rank.asc()).limit(50).all()
+    last_week=dates[1].date
+    old_entries=Top500.query.filter(Top500.date==last_week).all()
     newest_entries=Top500.query.filter(Top500.date == this_week).order_by(Top500.rank.asc()).all()
+    delta=[]
+    for new in newest_entries:
+        item={
+            'title': new.title,
+            'change':'New'
+        }
+        for old in old_entries:
+            if old.episode==new.episode and old.title==new.title:
+                item['change']= old.rank-new.rank
+                delta.append(item)
     def title(obj):
         return obj.title
     mytuple=tuple(map(title, newest_entries))
     counts= Counter(mytuple).most_common(5)
-    # print(counts)
-
-    return render_template('home.html',entries=newest_entries[:50],counts=counts)
+    print(len(delta))
+    return render_template('home.html',entries=newest_entries[:50], counts=counts, delta=delta[:50])
 
 # @page.route('/')
 # def home():
